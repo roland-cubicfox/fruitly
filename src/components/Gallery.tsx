@@ -40,7 +40,8 @@ const Gallery = ({ photos }: { photos: any }) => {
   return (
     <View style={{ flex: 1 }}>
       <FlatList
-        data={photos}
+        //data={photos}
+        data={photos.results}
         horizontal
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
@@ -58,7 +59,8 @@ const Gallery = ({ photos }: { photos: any }) => {
             <Image
               style={{ flex: 1, borderRadius: 5 }}
               source={{
-                uri: item.src.small,
+                //uri: item.src.small,
+                uri: item.media[0]['tinygif'].url,
               }}
             />
           </Animated.View>
