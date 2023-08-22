@@ -18,7 +18,7 @@ import Gifs from './src/components/Gifs';
 
 function App(): JSX.Element {
   const width = Dimensions.get('window').width;
-  const client = createClient(Config.PEXELS_API_KEY as string);
+  const client = createClient(Config.API_KEY as string);
 
   const [apples, setApples] = useState<any>([]);
   const [oranges, setOranges] = useState<any>([]);
@@ -107,7 +107,7 @@ function App(): JSX.Element {
                       width: width,
                     },
                   ]}>
-                  <Gallery photos={apples} />
+                  <Gallery data={apples} />
                 </Animated.View>
                 <Animated.View
                   style={[
@@ -118,7 +118,7 @@ function App(): JSX.Element {
                       width: width,
                     },
                   ]}>
-                  <Gallery photos={oranges} />
+                  <Gallery data={oranges} />
                 </Animated.View>
                 <Animated.View
                   style={[
@@ -129,7 +129,7 @@ function App(): JSX.Element {
                       width: width,
                     },
                   ]}>
-                  <Gallery photos={lemons} />
+                  <Gallery data={lemons} />
                 </Animated.View>
                 <Animated.View
                   style={[
@@ -140,7 +140,7 @@ function App(): JSX.Element {
                       width: width,
                     },
                   ]}>
-                  <Gallery photos={watermelons} />
+                  <Gallery data={watermelons} />
                 </Animated.View>
               </>
             )}

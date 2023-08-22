@@ -18,7 +18,6 @@ export const fetchGifs = async (
   query: string,
 ) => {
   try {
-    //  console.log(Config.GIPHY_API_KEY);
     const response = await fetch(
       `https://g.tenor.com/v1/search?key=LIVDSRZULELA&q=${query}&limit=15`,
     );
@@ -30,9 +29,8 @@ export const fetchGifs = async (
 };
 export const fetchTrendingGifs = async (setData: React.Dispatch<any>) => {
   try {
-    //  console.log(Config.GIPHY_API_KEY);
     const response = await fetch(
-      `https://g.tenor.com/v1/trending?key=LIVDSRZULELA&limit=25`,
+      `https://g.tenor.com/v1/trending?key=LIVDSRZULELA&media_filter=minimal&limit=50`,
     );
     const data = await response.json();
     setData(data);
