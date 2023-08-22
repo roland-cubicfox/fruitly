@@ -43,6 +43,11 @@ const Gallery = ({ data }: { data: any }) => {
         data={data}
         horizontal
         showsHorizontalScrollIndicator={false}
+        removeClippedSubviews={true}
+        initialNumToRender={2}
+        maxToRenderPerBatch={1}
+        updateCellsBatchingPeriod={100}
+        windowSize={7}
         renderItem={({ item }) => (
           <Animated.View
             style={[
