@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Animated, FlatList, Image, View } from 'react-native';
 
-const Gallery = ({ photos }: { photos: any }) => {
+const Gallery = ({ data }: { data: any }) => {
   const animatedValue = new Animated.Value(0);
 
   const startAnimation = () => {
@@ -40,7 +40,8 @@ const Gallery = ({ photos }: { photos: any }) => {
   return (
     <View style={{ flex: 1 }}>
       <FlatList
-        data={photos}
+        //data={data}
+        data={data.results}
         horizontal
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
@@ -58,7 +59,8 @@ const Gallery = ({ photos }: { photos: any }) => {
             <Image
               style={{ flex: 1, borderRadius: 5 }}
               source={{
-                uri: item.src.small,
+                //uri: item.src.small,
+                uri: item.media[0]['tinygif'].url,
               }}
             />
           </Animated.View>

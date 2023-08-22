@@ -6,12 +6,15 @@ import {
   Dimensions,
   SafeAreaView,
   StyleSheet,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { fetchPhotos } from './src/api';
+import { fetchTrendingGifs, fetchPhotos, fetchGifs } from './src/api';
 import { createClient } from 'pexels';
 import Gallery from './src/components/Gallery';
 import Menu from './src/components/Menu';
+import Gifs from './src/components/Gifs';
 
 function App(): JSX.Element {
   const width = Dimensions.get('window').width;
@@ -21,6 +24,10 @@ function App(): JSX.Element {
   const [oranges, setOranges] = useState<any>([]);
   const [lemons, setLemons] = useState<any>([]);
   const [watermelons, setWatermelons] = useState<any>([]);
+  const [gifs, setGifs] = useState<any>([]);
+
+  const [gifView, setGifView] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [slideAnimApples] = useState(new Animated.Value(width));
@@ -46,10 +53,16 @@ function App(): JSX.Element {
   useEffect(() => {
     (async function () {
       setIsLoading(true);
-      await fetchPhotos(client, setApples, 'apples');
-      await fetchPhotos(client, setOranges, 'oranges');
-      await fetchPhotos(client, setLemons, 'lemons');
-      await fetchPhotos(client, setWatermelons, 'watermelon');
+      await fetchGifs(setApples, 'apples');
+      await fetchGifs(setOranges, 'oranges');
+      await fetchGifs(setLemons, 'lemons');
+      await fetchGifs(setWatermelons, 'watermelon');
+
+      // await fetchPhotos(client, setApples, 'apples');
+      // await fetchPhotos(client, setOranges, 'oranges');
+      // await fetchPhotos(client, setLemons, 'lemons');
+      // await fetchPhotos(client, setWatermelons, 'watermelon');
+      await fetchTrendingGifs(setGifs);
       setIsLoading(false);
     })();
   }, []);
@@ -71,56 +84,80 @@ function App(): JSX.Element {
           <ActivityIndicator size="small" color="#0000ff" />
         ) : (
           <>
-            <Menu
-              current={current}
-              setCurrent={setCurrent}
-              slideIn={slideIn}
-              slideAnimApples={slideAnimApples}
-              slideAnimOranges={slideAnimOranges}
-              slideAnimLemons={slideAnimLemons}
-              slideAnimWatermelons={slideAnimWatermelons}
-              removeComponent={removeComponent}
-            />
-            <Animated.View
-              style={[
-                styles.slideContainer,
+            {gifView ? (
+              <Gifs gifs={gifs} />
+            ) : (
+              <>
+                <Menu
+                  current={current}
+                  setCurrent={setCurrent}
+                  slideIn={slideIn}
+                  slideAnimApples={slideAnimApples}
+                  slideAnimOranges={slideAnimOranges}
+                  slideAnimLemons={slideAnimLemons}
+                  slideAnimWatermelons={slideAnimWatermelons}
+                  removeComponent={removeComponent}
+                />
+                <Animated.View
+                  style={[
+                    styles.slideContainer,
 
-                { transform: [{ translateX: slideAnimApples }], width: width },
-              ]}>
-              <Gallery photos={apples} />
-            </Animated.View>
-            <Animated.View
-              style={[
-                styles.slideContainer,
+                    {
+                      transform: [{ translateX: slideAnimApples }],
+                      width: width,
+                    },
+                  ]}>
+                  <Gallery data={apples} />
+                </Animated.View>
+                <Animated.View
+                  style={[
+                    styles.slideContainer,
 
-                {
-                  transform: [{ translateX: slideAnimOranges }],
-                  width: width,
-                },
-              ]}>
-              <Gallery photos={oranges} />
-            </Animated.View>
-            <Animated.View
-              style={[
-                styles.slideContainer,
+                    {
+                      transform: [{ translateX: slideAnimOranges }],
+                      width: width,
+                    },
+                  ]}>
+                  <Gallery data={oranges} />
+                </Animated.View>
+                <Animated.View
+                  style={[
+                    styles.slideContainer,
 
-                { transform: [{ translateX: slideAnimLemons }], width: width },
-              ]}>
-              <Gallery photos={lemons} />
-            </Animated.View>
-            <Animated.View
-              style={[
-                styles.slideContainer,
+                    {
+                      transform: [{ translateX: slideAnimLemons }],
+                      width: width,
+                    },
+                  ]}>
+                  <Gallery data={lemons} />
+                </Animated.View>
+                <Animated.View
+                  style={[
+                    styles.slideContainer,
 
-                {
-                  transform: [{ translateX: slideAnimWatermelons }],
-                  width: width,
-                },
-              ]}>
-              <Gallery photos={watermelons} />
-            </Animated.View>
+                    {
+                      transform: [{ translateX: slideAnimWatermelons }],
+                      width: width,
+                    },
+                  ]}>
+                  <Gallery data={watermelons} />
+                </Animated.View>
+              </>
+            )}
           </>
         )}
+        <TouchableOpacity
+          style={{
+            backgroundColor: '#6157FF',
+            position: 'absolute',
+            padding: 10,
+
+            bottom: 0,
+            right: 0,
+          }}
+          onPress={() => setGifView(prev => !prev)}>
+          <Text style={{ color: 'white' }}>Gifs</Text>
+        </TouchableOpacity>
       </SafeAreaView>
     </GestureHandlerRootView>
   );
