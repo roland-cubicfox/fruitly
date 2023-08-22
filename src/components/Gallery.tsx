@@ -1,5 +1,12 @@
 import React, { useEffect } from 'react';
-import { Animated, FlatList, Image, View } from 'react-native';
+import {
+  ActivityIndicator,
+  Animated,
+  FlatList,
+  StyleSheet,
+  View,
+} from 'react-native';
+import { Image } from '@rneui/themed';
 
 const Gallery = ({ data }: { data: any }) => {
   const animatedValue = new Animated.Value(0);
@@ -58,18 +65,45 @@ const Gallery = ({ data }: { data: any }) => {
               animatedStyle,
             ]}>
             <Image
+              source={{
+                uri: item.url,
+              }}
+              containerStyle={styles.item}
+              transition
+              PlaceholderContent={
+                <View
+                  style={{
+                    backgroundColor: 'gray',
+                    height: 200,
+                    width: 150,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <ActivityIndicator size="large" color="#FE5C01" />
+                </View>
+              }
+            />
+            {/* <Image
               resizeMode="contain"
               style={{ flex: 1, borderRadius: 5 }}
               //source={item}
               source={{
                 uri: item.url,
               }}
-            />
+            /> */}
           </Animated.View>
         )}
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  item: {
+    //aspectRatio: 1,
+    width: '100%',
+    flex: 1,
+  },
+});
 
 export default Gallery;

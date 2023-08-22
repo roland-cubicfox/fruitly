@@ -6137,7 +6137,7 @@
     "convert-source-map" "^2.0.0"
     "invariant" "^2.2.4"
 
-"react-native-safe-area-context@^3.1.9 || ^4.0.0":
+"react-native-safe-area-context@^3.1.9 || ^4.0.0", "react-native-safe-area-context@^4.7.1":
   "integrity" "sha512-X2pJG2ttmAbiGlItWedvDkZg1T1ikmEDiz+7HsiIwAIm2UbFqlhqn+B1JF53mSxPzdNaDcCQVHRNPvj8oFu6Yg=="
   "resolved" "https://registry.npmjs.org/react-native-safe-area-context/-/react-native-safe-area-context-4.7.1.tgz"
   "version" "4.7.1"
