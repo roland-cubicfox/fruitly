@@ -9,15 +9,15 @@ const Menu = (props: any) => {
   const data = [0, 1, 2, 3];
 
   return (
-    <View style={{ height: 100 }}>
+    <View style={{ height: 75 }}>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <LinearGradient
-          colors={['white', 'white', 'transparent', 'white', 'white']}
+          colors={['#0A0A0B', '#0A0A0B', 'transparent', '#0A0A0B', '#0A0A0B']}
           start={{ x: 0, y: 0.5 }}
           end={{ x: 1, y: 0.5 }}
           style={{
             width: width,
-            height: 200,
+            height: 150,
             position: 'absolute',
             zIndex: 50,
             pointerEvents: 'none',
@@ -26,10 +26,10 @@ const Menu = (props: any) => {
       </View>
       <Carousel
         width={width / 8}
-        height={100}
+        height={75}
         style={{
           width: width,
-          height: 100,
+          height: 75,
           justifyContent: 'center',
           alignItems: 'center',
         }}

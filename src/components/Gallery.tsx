@@ -40,8 +40,7 @@ const Gallery = ({ data }: { data: any }) => {
   return (
     <View style={{ flex: 1 }}>
       <FlatList
-        //data={data}
-        data={data.results}
+        data={data}
         horizontal
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
@@ -49,23 +48,20 @@ const Gallery = ({ data }: { data: any }) => {
             style={[
               {
                 width: 150,
-                height: 150,
-                borderColor: '#555',
-                borderWidth: 5,
-                borderRadius: 10,
+                height: 200,
               },
               animatedStyle,
             ]}>
             <Image
+              resizeMode="contain"
               style={{ flex: 1, borderRadius: 5 }}
+              //source={item}
               source={{
-                //uri: item.src.small,
-                uri: item.media[0]['tinygif'].url,
+                uri: item.url,
               }}
             />
           </Animated.View>
         )}
-        keyExtractor={item => item.id}
       />
     </View>
   );
